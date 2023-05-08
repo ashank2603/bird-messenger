@@ -1,6 +1,8 @@
 'use client';
 
 import Button from "@/app/components/Button";
+import axios from "axios";
+import { toast } from 'react-hot-toast'
 import Input from "@/app/components/inputs/Input";
 import { useCallback, useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
@@ -33,7 +35,9 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === 'REGISTER') {
-        //axios register api to be added
+        axios.post('/api/register', data)
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false))
     }
 
     if (variant === 'LOGIN') {
